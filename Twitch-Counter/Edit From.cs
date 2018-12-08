@@ -14,6 +14,9 @@ namespace Twitch_Counter
     {
         List<Counter> counterList;
         int index;
+        int bind1;
+        int bind2;
+        int bind3;
         public Edit_From(List<Counter> cl, int i)
         {
             KeysConverter kc = new KeysConverter();
@@ -35,6 +38,45 @@ namespace Twitch_Counter
         private void Edit_From_Load(object sender, EventArgs e)
         {
             this.Icon = Twitch_Counter.Properties.Resources.twitch_LuI_icon;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            label4.Focus();
+            label4.PreviewKeyDown += label4_PreviewKeyDown;
+        }
+
+        private void label4_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            bind1 = e.KeyValue;
+            label4.Text = e.KeyCode.ToString();
+            label3.Focus();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            label6.Focus();
+            label6.PreviewKeyDown += label6_PreviewKeyDown;
+        }
+
+        private void label6_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            bind2 = e.KeyValue;
+            label6.Text = e.KeyCode.ToString();
+            label3.Focus();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            label4.Focus();
+            label4.PreviewKeyDown += label8_PreviewKeyDown;
+        }
+
+        private void label8_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            bind3 = e.KeyValue;
+            label8.Text = e.KeyCode.ToString();
+            label3.Focus();
         }
     }
 }

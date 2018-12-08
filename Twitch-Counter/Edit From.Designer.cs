@@ -107,6 +107,8 @@
             this.label4.Size = new System.Drawing.Size(51, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "Unbound";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.label4.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label4_PreviewKeyDown);
             // 
             // label5
             // 
@@ -125,6 +127,8 @@
             this.label6.Size = new System.Drawing.Size(51, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Unbound";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            this.label6.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label6_PreviewKeyDown);
             // 
             // label7
             // 
@@ -143,6 +147,8 @@
             this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 0;
             this.label8.Text = "Unbound";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            this.label8.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label8_PreviewKeyDown);
             // 
             // button1
             // 
