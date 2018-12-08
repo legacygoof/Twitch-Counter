@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Twitch_Counter
 {
-    public partial class Form1 : Form
+    public partial class Add_Counter : Form
     {
-        public Form1()
+        public Add_Counter()
         {
             InitializeComponent();
+        }
+
+        private void Add_Counter_Load(object sender, EventArgs e)
+        {
+            this.Icon = Twitch_Counter.Properties.Resources.twitch_LuI_icon;
         }
     }
 }
