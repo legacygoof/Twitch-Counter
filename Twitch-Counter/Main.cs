@@ -62,6 +62,49 @@ namespace Twitch_Counter
             UpdateJson();
         }
 
+        private void updatePreviewText()
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                Type t = (Type)counterList[listBox1.SelectedIndex].Type;
+                string s = counterList[listBox1.SelectedIndex].Format;
+                switch (t)
+                {
+                    case Type.OneCounter:
+                        {
+                            OneCounter oc = (OneCounter)counterList[listBox1.SelectedIndex];
+                            s = s.Replace("$c1", oc.CounterOne.ToString());
+                        }
+                        break;
+                    case Type.TwoCounters:
+                        {
+                            TwoCounters tc = (TwoCounters)counterList[listBox1.SelectedIndex];
+                            s = s.Replace("$c1", tc.CounterOne.ToString());
+                            s = s.Replace("$c2", tc.CounterTwo.ToString());
+                        }
+                        break;
+                    case Type.TwoCountersRatio:
+                        {
+                            TwoCountersRatio tcr = (TwoCountersRatio)counterList[listBox1.SelectedIndex];
+                            s = s.Replace("$c1", tcr.CounterOne.ToString());
+                            s = s.Replace("$c2", tcr.CounterTwo.ToString());
+                            tcr.CounterRatio = Math.Round((double)(tcr.CounterOne) / (double)(tcr.CounterTwo), 2);
+                            s = s.Replace("$ratio", tcr.CounterRatio.ToString());
+                        }
+                        break;
+                    case Type.ThreeCounters:
+                        {
+                            ThreeCounters ttc = (ThreeCounters)counterList[listBox1.SelectedIndex];
+                            s = s.Replace("$c1", ttc.CounterOne.ToString());
+                            s = s.Replace("$c2", ttc.CounterTwo.ToString());
+                            s = s.Replace("$c3", ttc.CounterThree.ToString());
+                        }
+                        break;
+                }
+                richTextBox1.Text = s;
+            }
+        }
+
         private void UpdateList()
         {
             listBox1.Items.Clear();
@@ -81,7 +124,7 @@ namespace Twitch_Counter
                 {
                     if (item.Type.ToString() == "0")
                     {
-                        counterList.Add(new OneCounter { Counter = Int16.Parse(item.CounterOne.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()) });
+                        counterList.Add(new OneCounter { CounterOne = Int16.Parse(item.CounterOne.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()) });
                     }
                     else if(item.Type.ToString() == "1")
                     {
@@ -136,6 +179,11 @@ namespace Twitch_Counter
         private void AddForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             UpdateJson();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updatePreviewText();
         }
     }
 }

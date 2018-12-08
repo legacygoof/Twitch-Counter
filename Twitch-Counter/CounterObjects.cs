@@ -22,7 +22,7 @@ namespace Twitch_Counter
     class OneCounter : Counter
     {
         public string Name { get; set; }
-        public int Counter { get; set; }
+        public int CounterOne { get; set; }
         public int CounterOneBind { get; set; }
         public string Format { get; set; }
         public int Type { get; set; }

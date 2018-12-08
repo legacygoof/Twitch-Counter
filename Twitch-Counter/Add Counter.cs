@@ -57,7 +57,7 @@ namespace Twitch_Counter
                 var obj = JsonConvert.DeserializeObject<dynamic>(jsonText);
                 switch(comboBox1.SelectedIndex)
                 {
-                    case 0: { OneCounter oc = new OneCounter { Name = textBox1.Text, Counter = 0, CounterOneBind = bind1, Format = textBox2.Text, Type = 0 }; obj.Counters.Add(JToken.Parse(JsonConvert.SerializeObject(oc, Formatting.Indented))); } break;
+                    case 0: { OneCounter oc = new OneCounter { Name = textBox1.Text, CounterOne = 0, CounterOneBind = bind1, Format = textBox2.Text, Type = 0 }; obj.Counters.Add(JToken.Parse(JsonConvert.SerializeObject(oc, Formatting.Indented))); } break;
                     case 1: { TwoCounters tc = new TwoCounters { Name = textBox1.Text, CounterOne = 0, CounterTwo = 0, CounterTwoBind = bind2, CounterOneBind = bind1, Format = textBox2.Text, Type = 0 }; obj.Counters.Add(JToken.Parse(JsonConvert.SerializeObject(tc, Formatting.Indented))); } break;
                     case 2: { TwoCountersRatio tcr = new TwoCountersRatio { Name = textBox1.Text, CounterOne = 0, CounterTwo = 0, CounterTwoBind = bind2, CounterOneBind = bind1, Format = textBox2.Text, Type = 0, CounterRatio = 0.0 }; obj.Counters.Add(JToken.Parse(JsonConvert.SerializeObject(tcr, Formatting.Indented))); } break;
                     case 3: { ThreeCounters ttc = new ThreeCounters { Name = textBox1.Text, CounterOne = 0, CounterTwo = 0, CounterTwoBind = bind2, CounterOneBind = bind1, CounterThreeBind = bind3, CounterThree = 0, Format = textBox2.Text, Type = 0 }; obj.Counters.Add(JToken.Parse(JsonConvert.SerializeObject(ttc, Formatting.Indented))); } break;
