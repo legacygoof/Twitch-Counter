@@ -117,6 +117,7 @@
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Counters);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Main";
             this.Text = "Twitch Counter";
             this.Load += new System.EventHandler(this.Form1_Load);

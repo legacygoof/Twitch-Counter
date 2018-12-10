@@ -33,12 +33,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -90,34 +90,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Binds";
             // 
-            // label3
+            // label8
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Wins Bind:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(70, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Unbound";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            this.label4.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label4_PreviewKeyDown);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 51);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Loss Bind:";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(70, 75);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Unbound";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            this.label8.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label8_PreviewKeyDown);
             // 
             // label6
             // 
@@ -130,6 +112,17 @@
             this.label6.Click += new System.EventHandler(this.label6_Click);
             this.label6.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label6_PreviewKeyDown);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(70, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Unbound";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.label4.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label4_PreviewKeyDown);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -139,16 +132,23 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Ties Bind:";
             // 
-            // label8
+            // label5
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(70, 75);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Unbound";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            this.label8.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label8_PreviewKeyDown);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 51);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Loss Bind:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Wins Bind:";
             // 
             // button1
             // 
@@ -171,6 +171,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Edit_From";
             this.Text = "Edit From";
             this.Load += new System.EventHandler(this.Edit_From_Load);

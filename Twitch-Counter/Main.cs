@@ -11,6 +11,8 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
+using System.Security.Principal;
+
 namespace Twitch_Counter
 {
     public partial class Main : Form
@@ -24,13 +26,38 @@ namespace Twitch_Counter
         Thread hotkeys;
         int selected = -1;
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        private static string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Twitch Counter";
+        private static string jsonFile = " { \"Counters\": [] }";
+        public string jsonFilePath = path + "\\Counters.json";
         public Main()
         {
             InitializeComponent();
         }
-
+        public static bool IsAdministrator()
+        {
+            var identity = WindowsIdentity.GetCurrent();
+            var principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
+            
+            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(path+"\\Text Files");
+            if(!File.Exists(path+"\\Counters.json"))
+            {
+                using (FileStream fs = File.Create(path + "\\Counters.json"))
+                {
+                    Byte[] info = new UTF8Encoding(true).GetBytes(jsonFile);
+                    fs.Write(info, 0, info.Length);
+                }
+            }
+            if (!IsAdministrator())
+            {               
+                //MessageBox.Show("Please Run Program As Administrator");
+                //this.Close();
+            }
             this.Icon = Twitch_Counter.Properties.Resources.twitch_LuI_icon;
             UpdateJson();
             cm.ItemClicked += new ToolStripItemClickedEventHandler(ContextMenu_ItemClicked);
@@ -51,7 +78,7 @@ namespace Twitch_Counter
         private void timer_Tick(object sender, EventArgs e)
         {
             UpdateJson();
-            if(selected > -1 && listBox1.Items.Count > 0)
+            if(selected > -1 && listBox1.Items.Count > selected)
                 listBox1.SelectedIndex = selected;
             updatePreviewText();
         }
@@ -71,7 +98,7 @@ namespace Twitch_Counter
         
         private void resetValues(int selectedIndex)
         {
-            jsonTxt = File.ReadAllText("Counters.json");
+            jsonTxt = File.ReadAllText(jsonFilePath);
             OneCounter oc;
             TwoCounters tc;
             TwoCountersRatio tcr;
@@ -85,7 +112,7 @@ namespace Twitch_Counter
                 case Type.TwoCountersRatio: tcr = (TwoCountersRatio)counterList[selectedIndex]; tcr.CounterOne = 0; tcr.CounterTwo = 0; tcr.CounterRatio = 0; obj.Counters.Insert(selectedIndex, JToken.Parse(JsonConvert.SerializeObject(tcr, Formatting.Indented))); break;
                 case Type.ThreeCounters: ttc = (ThreeCounters)counterList[selectedIndex]; ttc.CounterOne = 0; ttc.CounterTwo = 0; ttc.CounterThree = 0; obj.Counters.Insert(selectedIndex, JToken.Parse(JsonConvert.SerializeObject(ttc, Formatting.Indented))); break;
             }
-            File.WriteAllText("Counters.json", obj.ToString());
+            File.WriteAllText(jsonFilePath, obj.ToString());
             UpdateJson();
         }
 
@@ -104,6 +131,8 @@ namespace Twitch_Counter
 
         private void updatePreviewText()
         {
+            if (listBox1.Items.Count == 0)
+                richTextBox1.Text = "";
             if (listBox1.SelectedIndex != -1)
             {
                 Type t = (Type)counterList[listBox1.SelectedIndex].Type;
@@ -162,7 +191,7 @@ namespace Twitch_Counter
 
         private void UpdateJson()
         {
-            jsonTxt = File.ReadAllText("Counters.json");
+            jsonTxt = File.ReadAllText(jsonFilePath);
             //MessageBox.Show(jsonTxt);
             counterList.Clear();
             try
@@ -199,10 +228,11 @@ namespace Twitch_Counter
 
         private void removeJsonItem(int i)
         {
-            jsonTxt = File.ReadAllText("Counters.json");
+            jsonTxt = File.ReadAllText(jsonFilePath);
             var jObject = JsonConvert.DeserializeObject<dynamic>(jsonTxt);
+            File.Delete(path + "\\Text Files/" + jObject.Counters[i].Name + ".txt");
             jObject.Counters.RemoveAt(i);
-            File.WriteAllText("Counters.json", jObject.ToString());
+            File.WriteAllText(jsonFilePath, jObject.ToString());
             //MessageBox.Show(jObject.ToString());
             UpdateJson();
         }

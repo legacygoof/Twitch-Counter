@@ -15,6 +15,8 @@ namespace Twitch_Counter
 {
     public partial class Edit_From : Form
     {
+        private static string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Twitch Counter";
+        public string jsonFilePath = path + "\\Counters.json";
         List<Counter> counterList;
         Type type;
         int index;
@@ -28,7 +30,7 @@ namespace Twitch_Counter
         public Edit_From(List<Counter> cl, int i)
         {
             KeysConverter kc = new KeysConverter();
-            
+            this.MaximizeBox = false;
             counterList = cl;
             index = i;
             InitializeComponent();
@@ -91,7 +93,7 @@ namespace Twitch_Counter
 
         private void saveEdits()
         {
-            string jsonTxt = File.ReadAllText("Counters.json");
+            string jsonTxt = File.ReadAllText(jsonFilePath);
 
             try
             {
@@ -104,7 +106,7 @@ namespace Twitch_Counter
                     case Type.TwoCountersRatio: tcr.CounterOneBind = bind1; tcr.CounterTwoBind = bind2; tcr.Name = textBox1.Text; tcr.Format = textBox2.Text; obj.Counters.Insert(index, JToken.Parse(JsonConvert.SerializeObject(tcr, Formatting.Indented))); break;
                     case Type.ThreeCounters: ttc.CounterOneBind = bind1; ttc.CounterTwoBind = bind2; ttc.CounterThreeBind = bind3; ttc.Name = textBox1.Text; ttc.Format = textBox2.Text; obj.Counters.Insert(index, JToken.Parse(JsonConvert.SerializeObject(ttc, Formatting.Indented))); break;
                 }
-                File.WriteAllText("Counters.json", obj.ToString());
+                File.WriteAllText(jsonFilePath, obj.ToString());
                 this.Close();
             }
             catch (JsonException ex)

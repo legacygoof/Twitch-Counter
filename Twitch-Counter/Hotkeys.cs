@@ -27,8 +27,12 @@ class Hotkeys
     private static Twitch_Counter.TwoCounters tc;
     private static Twitch_Counter.TwoCountersRatio tcr;
     private static Twitch_Counter.ThreeCounters ttc;
+    private static string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\Twitch Counter";
+    public static string jsonFilePath = path + "\\Counters.json";
+
     public static void Start()
     {
+        
         _hookID = SetHook(_proc);
         Application.Run();
         UnhookWindowsHookEx(_hookID);
@@ -67,7 +71,7 @@ class Hotkeys
     private static void Increase()
     {
         Twitch_Counter.Type t = (Twitch_Counter.Type)counterList[index].Type;
-        string jsonTxt = File.ReadAllText("Counters.json");
+        string jsonTxt = File.ReadAllText(jsonFilePath);
         var obj = JsonConvert.DeserializeObject<dynamic>(jsonTxt);
         obj.Counters.RemoveAt(index);
         switch (t)
@@ -118,13 +122,13 @@ class Hotkeys
                 break;
         }
         updateFile();
-        File.WriteAllText("Counters.json", obj.ToString());
+        File.WriteAllText(jsonFilePath, obj.ToString());
     }
 
     private static void Decrease()
     {
         Twitch_Counter.Type t = (Twitch_Counter.Type)counterList[index].Type;
-        string jsonTxt = File.ReadAllText("Counters.json");
+        string jsonTxt = File.ReadAllText(jsonFilePath);
         var obj = JsonConvert.DeserializeObject<dynamic>(jsonTxt);
         obj.Counters.RemoveAt(index);
         switch (t)
@@ -175,7 +179,7 @@ class Hotkeys
                 break;
         }
         updateFile();
-        File.WriteAllText("Counters.json", obj.ToString());
+        File.WriteAllText(jsonFilePath, obj.ToString());
     }
 
     private static void updateFile()
@@ -224,7 +228,7 @@ class Hotkeys
                 }
                 break;
         }
-        File.WriteAllText("Text Files/" + name + ".txt", text);
+        File.WriteAllText(path+"\\Text Files/" + name + ".txt", text);
     }
 
 
