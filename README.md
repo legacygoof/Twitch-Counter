@@ -32,7 +32,7 @@
   Im working on making it automated for certain games because why not xD. Im taking a lot of time out of my day to do this so any help or support would be much apprecieated
   
   
-  **Support**
+  # Support
   
    [![alt text](https://imgur.com/0ugMekD.jpg "Donate")](https://twitter.com/_Kevin_Hansen_ "My Twitter Page")
   
