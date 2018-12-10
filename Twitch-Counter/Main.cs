@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using System.Threading;
 namespace Twitch_Counter
 {
     public partial class Main : Form
@@ -21,6 +21,9 @@ namespace Twitch_Counter
         ContextMenuStrip cm = new ContextMenuStrip();
         Edit_From editForm;
         Add_Counter addForm = new Add_Counter();
+        Thread hotkeys;
+        int selected = -1;
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public Main()
         {
             InitializeComponent();
@@ -34,6 +37,23 @@ namespace Twitch_Counter
             cm.Items.Add("Edit");
             cm.Items.Add("Reset Values");
             cm.Items.Add("Remove");
+            hotkeys = new Thread(Hotkeys.Start);
+            hotkeys.IsBackground = true;
+            hotkeys.ApartmentState = ApartmentState.STA;
+            hotkeys.Start();
+
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Interval = 2000;
+            timer.Enabled = true;
+            timer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            UpdateJson();
+            if(selected > -1 && listBox1.Items.Count > 0)
+                listBox1.SelectedIndex = selected;
+            updatePreviewText();
         }
 
         private void ContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -43,10 +63,30 @@ namespace Twitch_Counter
                 switch (e.ClickedItem.ToString())
                 {
                     case "Edit": setupEditForm(listBox1.SelectedIndex); break;
-                    case "Reset Values": break;
+                    case "Reset Values": resetValues(listBox1.SelectedIndex); break;
                     case "Remove": removeJsonItem(listBox1.SelectedIndex); break;
                 }
             }
+        }
+        
+        private void resetValues(int selectedIndex)
+        {
+            jsonTxt = File.ReadAllText("Counters.json");
+            OneCounter oc;
+            TwoCounters tc;
+            TwoCountersRatio tcr;
+            ThreeCounters ttc;
+            var obj = JsonConvert.DeserializeObject<dynamic>(jsonTxt);
+            obj.Counters.RemoveAt(selectedIndex);
+            switch ((Type)counterList[selectedIndex].Type)
+            {
+                case Type.OneCounter: oc = (OneCounter)counterList[selectedIndex]; oc.CounterOne = 0; obj.Counters.Insert(selectedIndex, JToken.Parse(JsonConvert.SerializeObject(oc, Formatting.Indented))); break;
+                case Type.TwoCounters: tc = (TwoCounters)counterList[selectedIndex]; tc.CounterOne = 0; tc.CounterTwo = 0; obj.Counters.Insert(selectedIndex, JToken.Parse(JsonConvert.SerializeObject(tc, Formatting.Indented))); break;
+                case Type.TwoCountersRatio: tcr = (TwoCountersRatio)counterList[selectedIndex]; tcr.CounterOne = 0; tcr.CounterTwo = 0; tcr.CounterRatio = 0; obj.Counters.Insert(selectedIndex, JToken.Parse(JsonConvert.SerializeObject(tcr, Formatting.Indented))); break;
+                case Type.ThreeCounters: ttc = (ThreeCounters)counterList[selectedIndex]; ttc.CounterOne = 0; ttc.CounterTwo = 0; ttc.CounterThree = 0; obj.Counters.Insert(selectedIndex, JToken.Parse(JsonConvert.SerializeObject(ttc, Formatting.Indented))); break;
+            }
+            File.WriteAllText("Counters.json", obj.ToString());
+            UpdateJson();
         }
 
         private void setupEditForm(int index)
@@ -88,7 +128,10 @@ namespace Twitch_Counter
                             TwoCountersRatio tcr = (TwoCountersRatio)counterList[listBox1.SelectedIndex];
                             s = s.Replace("$c1", tcr.CounterOne.ToString());
                             s = s.Replace("$c2", tcr.CounterTwo.ToString());
-                            tcr.CounterRatio = Math.Round((double)(tcr.CounterOne) / (double)(tcr.CounterTwo), 2);
+                            if (tcr.CounterTwo != 0)
+                                tcr.CounterRatio = Math.Round((double)(tcr.CounterOne) / (double)(tcr.CounterTwo), 2);
+                            else
+                                tcr.CounterRatio = Math.Round((double)(tcr.CounterOne), 2);
                             s = s.Replace("$ratio", tcr.CounterRatio.ToString());
                         }
                         break;
@@ -112,6 +155,11 @@ namespace Twitch_Counter
                 listBox1.Items.Add(c.Name);
         }
 
+        public static void updateJson()
+        {
+            
+        }
+
         private void UpdateJson()
         {
             jsonTxt = File.ReadAllText("Counters.json");
@@ -124,19 +172,19 @@ namespace Twitch_Counter
                 {
                     if (item.Type.ToString() == "0")
                     {
-                        counterList.Add(new OneCounter { CounterOne = Int16.Parse(item.CounterOne.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()) });
+                        counterList.Add(new OneCounter { CounterOne = Int16.Parse(item.CounterOne.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()) }); Hotkeys.binds.Add(Int16.Parse(item.CounterOneBind.ToString()));
                     }
                     else if(item.Type.ToString() == "1")
                     {
-                        counterList.Add(new TwoCounters { CounterOne = Int16.Parse(item.CounterOne.ToString()), CounterTwo = Int16.Parse(item.CounterTwo.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()), CounterTwoBind = Int16.Parse(item.CounterTwoBind.ToString()) });
+                        counterList.Add(new TwoCounters { CounterOne = Int16.Parse(item.CounterOne.ToString()), CounterTwo = Int16.Parse(item.CounterTwo.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()), CounterTwoBind = Int16.Parse(item.CounterTwoBind.ToString()) }); Hotkeys.binds.Add(Int16.Parse(item.CounterOneBind.ToString())); Hotkeys.binds.Add(Int16.Parse(item.CounterTwoBind.ToString()));
                     }
                     else if (item.Type.ToString() == "2")
                     {
-                        counterList.Add(new TwoCountersRatio { CounterOne = Int16.Parse(item.CounterOne.ToString()), CounterTwo = Int16.Parse(item.CounterTwo.ToString()), CounterRatio = Double.Parse(item.Ratio.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()), CounterTwoBind = Int16.Parse(item.CounterTwoBind.ToString()) });
+                        counterList.Add(new TwoCountersRatio { CounterOne = Int16.Parse(item.CounterOne.ToString()), CounterTwo = Int16.Parse(item.CounterTwo.ToString()), CounterRatio = Double.Parse(item.CounterRatio.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()), CounterTwoBind = Int16.Parse(item.CounterTwoBind.ToString()) }); Hotkeys.binds.Add(Int16.Parse(item.CounterOneBind.ToString())); Hotkeys.binds.Add(Int16.Parse(item.CounterTwoBind.ToString()));
                     }
                     else if (item.Type.ToString() == "3")
                     {
-                        counterList.Add(new ThreeCounters { CounterOne = Int16.Parse(item.CounterOne.ToString()), CounterTwo = Int16.Parse(item.CounterTwo.ToString()), CounterThree = Int16.Parse(item.CounterThree.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()), CounterTwoBind = Int16.Parse(item.CounterTwoBind.ToString()), CounterThreeBind = Int16.Parse(item.CounterThreeBind.ToString()) });
+                        counterList.Add(new ThreeCounters { CounterOne = Int16.Parse(item.CounterOne.ToString()), CounterTwo = Int16.Parse(item.CounterTwo.ToString()), CounterThree = Int16.Parse(item.CounterThree.ToString()), Format = item.Format.ToString(), Name = item.Name, Type = Int16.Parse(item.Type.ToString()), CounterOneBind = Int16.Parse(item.CounterOneBind.ToString()), CounterTwoBind = Int16.Parse(item.CounterTwoBind.ToString()), CounterThreeBind = Int16.Parse(item.CounterThreeBind.ToString()) }); Hotkeys.binds.Add(Int16.Parse(item.CounterOneBind.ToString())); Hotkeys.binds.Add(Int16.Parse(item.CounterTwoBind.ToString())); Hotkeys.binds.Add(Int16.Parse(item.CounterThreeBind.ToString()));
                     }
                 }
             }
@@ -144,6 +192,7 @@ namespace Twitch_Counter
             {
                 MessageBox.Show(ex.ToString());
             }
+            Hotkeys.counterList = counterList;
             UpdateList();
 
         }
@@ -183,7 +232,19 @@ namespace Twitch_Counter
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Hotkeys.index = listBox1.SelectedIndex;
+            selected = listBox1.SelectedIndex;
             updatePreviewText();
+        }
+        //support
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://github.com/legacygoof/Twitch-Counter");
+        }
+        //donate
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://paypal.me/GoofSta");
         }
     }
 }

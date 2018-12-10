@@ -110,6 +110,8 @@
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Num-Pad 7";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.label3.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label3_PreviewKeyDown);
             // 
             // label4
             // 
@@ -128,6 +130,8 @@
             this.label5.Size = new System.Drawing.Size(60, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "Num-Pad 8";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.label5.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label5_PreviewKeyDown);
             // 
             // label6
             // 
@@ -146,6 +150,8 @@
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Num-Pad 9";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            this.label7.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.label7_PreviewKeyDown);
             // 
             // label8
             // 

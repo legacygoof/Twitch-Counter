@@ -80,6 +80,7 @@
     <Compile Include="Edit From.Designer.cs">
       <DependentUpon>Edit From.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hotkeys.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

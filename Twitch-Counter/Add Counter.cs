@@ -62,15 +62,53 @@ namespace Twitch_Counter
                     case 2: { TwoCountersRatio tcr = new TwoCountersRatio { Name = textBox1.Text, CounterOne = 0, CounterTwo = 0, CounterTwoBind = bind2, CounterOneBind = bind1, Format = textBox2.Text, Type = 0, CounterRatio = 0.0 }; obj.Counters.Add(JToken.Parse(JsonConvert.SerializeObject(tcr, Formatting.Indented))); } break;
                     case 3: { ThreeCounters ttc = new ThreeCounters { Name = textBox1.Text, CounterOne = 0, CounterTwo = 0, CounterTwoBind = bind2, CounterOneBind = bind1, CounterThreeBind = bind3, CounterThree = 0, Format = textBox2.Text, Type = 0 }; obj.Counters.Add(JToken.Parse(JsonConvert.SerializeObject(ttc, Formatting.Indented))); } break;
                 }
-                MessageBox.Show(obj.ToString());
+                //MessageBox.Show(obj.ToString());
                 File.WriteAllText("Counters.json", obj.ToString());
-                MessageBox.Show(obj.ToString());
+                //MessageBox.Show(obj.ToString());
             }
             catch(JsonException ex)
             {
                 MessageBox.Show(ex.ToString());
             }
             this.Close();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            label3.Focus();
+            label3.PreviewKeyDown += label3_PreviewKeyDown;
+        }
+
+        private void label3_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            bind1 = e.KeyValue;
+            label3.Text = e.KeyCode.ToString();
+            this.Focus();
+        }
+        private void label5_Click(object sender, EventArgs e)
+        {
+            label5.Focus();
+            label5.PreviewKeyDown += label5_PreviewKeyDown;
+        }
+
+        private void label5_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            bind2 = e.KeyValue;
+            label5.Text = e.KeyCode.ToString();
+            this.Focus();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+            label7.Focus();
+            label7.PreviewKeyDown += label7_PreviewKeyDown;
+        }
+
+        private void label7_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            bind3 = e.KeyValue;
+            label7.Text = e.KeyCode.ToString();
+            this.Focus();
         }
     }
 }
