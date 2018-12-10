@@ -18,21 +18,18 @@
   Example:
   
   Name: Win-Loss Counter
-  Format: Wins: $Wins - Loss: $Loss
+  Format: Wins: $c1 - Loss: $c2
   
   Text-On-Stream: Wins: 2 - Loss: 4
   
-  Win_Bind: numpad7
-  Loss_Bind: numpad8
+  CounterOneBind: numpad7
+  CounterTwoBind: numpad8
   
-  + To select wins to increase or decrease press numpad7 and use numpad + or - to increase or decrease
+  + To select counter one to increase or decrease press numpad7 and use numpad + or - to increase or decrease its value and it will update the text file in real time
   
   
   # Changes To Come
-  Im working and making it automated for certain games, but for the next week im going to be cleaning up my code as i didnt really
-  put much thought into making it the best i can, i just wanted to get it working asap. I probably 200 lines of code i dont need.
-  A more complete version will be released by next week so keep coming by. im taking a lot of time out of my day to do this so really
-  any support or help will be appreciated :)
+  Im working on making it automated for certain games because why not xD. Im taking a lot of time out of my day to do this so any help or support would be much apprecieated
   
   
   **Support**
@@ -40,8 +37,9 @@
    [![alt text](https://imgur.com/0ugMekD.jpg "Donate")](https://twitter.com/_Kevin_Hansen_ "My Twitter Page")
   
   
-  if you have any experince with github please add me on discord.
+  if you have any issues or want to help add me on discord
   **Discord Goof#4816**
   
+  **My Plugs**
   [![alt text](https://imgur.com/qz3cUMk.jpg "Twitter")](https://twitter.com/_Kevin_Hansen_ "My Twitter Page")
   [![alt text](https://imgur.com/Kke6QiX.jpg "Twitch")](https://twitch.tv/DaGoofSta "My Twitch Page")
