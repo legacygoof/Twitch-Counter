@@ -17,13 +17,13 @@
   
   Example:
   
-  Name: Win-Loss Counter
-  Format: Wins: $c1 - Loss: $c2
+  + Name: Win-Loss Counter
+  + Format: Wins: $c1 - Loss: $c2
   
-  Text-On-Stream: Wins: 2 - Loss: 4
+  + Text-On-Stream: Wins: 2 - Loss: 4
   
-  CounterOneBind: numpad7
-  CounterTwoBind: numpad8
+  + CounterOneBind: numpad7
+  + CounterTwoBind: numpad8
   
   + To select counter one to increase or decrease press numpad7 and use numpad + or - to increase or decrease its value and it will update the text file in real time
   
@@ -40,6 +40,6 @@
   if you have any issues or want to help add me on discord
   **Discord Goof#4816**
   
-  **My Plugs**
+  # My Plugs
   [![alt text](https://imgur.com/qz3cUMk.jpg "Twitter")](https://twitter.com/_Kevin_Hansen_ "My Twitter Page")
   [![alt text](https://imgur.com/Kke6QiX.jpg "Twitch")](https://twitch.tv/DaGoofSta "My Twitch Page")
