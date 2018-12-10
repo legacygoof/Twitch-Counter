@@ -30,7 +30,7 @@
   # Download/Installation
   download the installation and then it will create a Twitch Counter Folder on the desktop where the text files will be stored along with the json
   
-  [![alt text](https://currentsgk.com/wp-content/uploads/2017/10/focal-forest-pdf-download-button-en.png.pagespeed.ce_.hmr0HV9O20.png "Download")](https://www.mediafire.com/file/tqe5lzdx06l9mjg/TC_Installation.exe/file "Download")
+  [![alt text](https://currentsgk.com/wp-content/uploads/2017/10/focal-forest-pdf-download-button-en.png.pagespeed.ce_.hmr0HV9O20.png "Download")](http://www.mediafire.com/file/o2t29qsvtuoou85/TC_Installation.exe/file "Download")
   # Changes To Come
   Im working on making it automated for certain games because why not xD. Im taking a lot of time out of my day to do this so any help or support would be much apprecieated
   
