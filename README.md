@@ -37,7 +37,7 @@
   
   **Support**
   
-  **[Donate](https://www.paypal.me/goofsta "My Paypal.me Page")**
+   [![alt text](https://static1.squarespace.com/static/5aa9606c5cfd790a168a924d/t/5b6b6b9c352f53e0fd73120c/1534459911097/PayPal+Donate+Button.jpg "Donate")](https://twitter.com/_Kevin_Hansen_ "My Twitter Page")
   
   
   if you have any experince with github please add me on discord.
