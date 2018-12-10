@@ -34,7 +34,7 @@
   
   # Support
   
-   [![alt text](https://imgur.com/0ugMekD.jpg "Donate")](https://twitter.com/_Kevin_Hansen_ "My Twitter Page")
+   [![alt text](https://imgur.com/0ugMekD.jpg "Donate")](https://paypal.me/GoofSta "Donate")
   
   
   if you have any issues or want to help add me on discord
