@@ -43,5 +43,5 @@
   if you have any experince with github please add me on discord.
   **Discord Goof#4816**
   
-  [![alt text](https://imgur.com/a/2a0LmYL.jpg "Twitter")](https://twitter.com/_Kevin_Hansen_ "My Twitter Page")
+  [![alt text](http://imgur.com/a/2a0LmYL.jpg "Twitter")](https://twitter.com/_Kevin_Hansen_ "My Twitter Page")
   [![alt text](http://somegadgetguy.com/wp-content/uploads/2014/08/twitch-logo.jpg "Twitch")](https://twitch.tv/DaGoofSta "My Twitch Page")
