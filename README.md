@@ -29,7 +29,7 @@
   
   # Download/Installation
   You must run as administrator for this to work, no viruses just cant edit json file without it
-  [![alt text]("Download")](https://www.mediafire.com/file/czzs75se868ck78/TC_Installation.exe/file)
+  [![alt text]("Download")](https://www.mediafire.com/file/czzs75se868ck78/TC_Installation.exe/file "Download")
   # Changes To Come
   Im working on making it automated for certain games because why not xD. Im taking a lot of time out of my day to do this so any help or support would be much apprecieated
   
