@@ -28,7 +28,7 @@
   + To select counter one to increase or decrease press numpad7 and use numpad + or - to increase or decrease its value and it will update the text file in real time
   
   # Download/Installation
-  You must run as administrator for this to work, no viruses just cant edit json file without it
+  download the installation and then it will create a Twitch Counter Folder on the desktop where the text files will be stored along with the json
   [![alt text](https://currentsgk.com/wp-content/uploads/2017/10/focal-forest-pdf-download-button-en.png.pagespeed.ce_.hmr0HV9O20.png "Download")](http://www.mediafire.com/file/k83113kjeptct91/TC_Installation.exe/file "Download")
   # Changes To Come
   Im working on making it automated for certain games because why not xD. Im taking a lot of time out of my day to do this so any help or support would be much apprecieated
