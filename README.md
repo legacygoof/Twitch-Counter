@@ -2,19 +2,16 @@
 
 # Summary:
   I created twitch-counter in my free time because I was unable to find any assisted counters out there to make it easier to
-  show my wins or losses on stream. I figured i might as well make one and it was a lot more complex than i actually thought
-  it was going to be. Anyways, with Twitch-Counter your able to create your own counters for games and set binds to increase or
-  decrease the value of the counter. you can have a win-loss counter or a kill-death counter. All counters are saved to there own
-  text file and you can use that text file for your stream.
+  show my wins or losses on stream so I figured i might as well make one and share it with the community. With Twitch-Counter your able   to create your own counters for games and set binds to increase or decrease the value of the counter. you can have a win-loss counter   or a kill-death counter. All counters are saved to there own text file and you can use that text file for your stream. This program     does not have to be active for the counter to update, just has to be running.
   
   **How To Use:**
   + Create counter
-  + Set binds
+  + Set binds (Suggested default binds already set)
   + Select counter you want to use by clicking on it in the left list box
   + Right click on selected counter to edit or remove it.
   + Right text box shows what the counter will say on stream
   + use Num-Pad + and Num-Pad - to increase and decrease values of selected counter variable
-  
+  + Text files will be saved in a folder called Twitch Counter on the desktop
   Example:
   
   + Name: Win-Loss Counter
