@@ -1,4 +1,5 @@
 # Twitch-Counter
+  + Version 1.0
 
 # Summary:
   I created twitch-counter in my free time because I was unable to find any assisted counters out there to make it easier to
