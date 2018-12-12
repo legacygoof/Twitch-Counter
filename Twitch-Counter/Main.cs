@@ -12,12 +12,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Security.Principal;
+using System.Net;
 
 namespace Twitch_Counter
 {
     public partial class Main : Form
     {
-
+        string version = "Version 1.0";
         public List<Counter> counterList = new List<Counter>();
         string jsonTxt;
         ContextMenuStrip cm = new ContextMenuStrip();
@@ -39,6 +40,7 @@ namespace Twitch_Counter
             var principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.MaximizeBox = false;
@@ -73,6 +75,24 @@ namespace Twitch_Counter
             timer.Interval = 2000;
             timer.Enabled = true;
             timer.Start();
+            checkUpdate();
+        }
+
+        private void checkUpdate()
+        {
+            string s = "";
+            using (WebClient client = new WebClient())
+            {
+                s = client.DownloadString("http://pastebin.com/raw/PFVxLSej");
+            }
+            if (!s.Equals(version))
+            {
+                DialogResult dialogResult = MessageBox.Show("Theres a newer version of Twitch-Counter do you want to update?", "Update", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start("http://github.com/legacygoof/Twitch-Counter");
+                }
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -275,6 +295,11 @@ namespace Twitch_Counter
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://paypal.me/GoofSta");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://github.com/legacygoof/Twitch-Counter");
         }
     }
 }
